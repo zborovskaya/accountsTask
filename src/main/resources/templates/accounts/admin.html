@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список аккаунтов</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Список аккаунтов</h1>
+        </div>
+        <div class="btn btn-primary" style="position: absolute; top: 10px; right: 10px;">
+            <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+            </form> </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Change status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="account : ${accounts}">
+                    <td th:text="${account.person.getUsername()}"></td>
+                    <td th:text="${account.number}"></td>
+                    <td th:text="${account.value}"></td>
+                    <td th:text="${account.status}"></td>
+                    <td>
+                    <form th:action="@{/accounts/admin/{id}/changeStatus(id=${account.number})}" method="post">
+                        <button type="submit"
+                                th:text="${account.status == 'BLOCKED'} ? 'Activate' : 'Block'"
+                                th:classappend="${account.status == 'BLOCKED'} ? 'btn btn-success' : 'btn btn-danger'">
+                        </button>
+                    </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

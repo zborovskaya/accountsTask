@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Edit Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container"><h1>Edit Account</h1>
+    <h1 th:text="${'Account value ' + account.getValue()}"></h1>
+    <form action="/accounts/user/edit" method="post">
+        <div class="form-group"><label for="value" th:text="${operation == 'TOP_UP'} ? 'Top up account' : 'Withdraw account'"></label>
+            <input type="number" class="form-control" id="value"
+                   name="value">
+            <input type ="hidden" th:name="accountNumber" th:value="${account.getNumber()}">
+            <input type ="hidden" th:name="operation" th:value="${operation}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+</body>
+</html>
