@@ -1,5 +1,5 @@
-# Используем образ Maven для сборки
-FROM maven:3.8.6-openjdk-17 AS build
+# Используем образ Maven для сборки приложения
+FROM maven:3.8.5-openjdk-17 AS build
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -9,7 +9,7 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Используем более легкий образ OpenJDK для запуска
+# Переходим к использованию легковесного образа OpenJDK для запуска приложения
 FROM openjdk:17-jdk-alpine
 
 # Устанавливаем рабочую директорию

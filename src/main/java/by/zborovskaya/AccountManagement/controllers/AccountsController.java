@@ -27,7 +27,7 @@ public class AccountsController {
     @PostMapping("/admin/{id}/changeStatus")
     public String changeStatus(@PathVariable int id) {
         accountService.changeStatus(id);
-        return "redirect:/accounts";
+        return "redirect:/accounts/admin";
     }
 
     @GetMapping("/user")
